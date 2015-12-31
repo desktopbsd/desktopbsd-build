@@ -17,7 +17,7 @@ fi
 
 # UFS label
 
-GHOSTBSD_LABEL=${GHOSTBSD_LABEL:-"GhostBSD"} 
+GHOSTBSD_LABEL=${GHOSTBSD_LABEL:-"DESKTOPBSD"} 
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export PATH
