@@ -1,0 +1,26 @@
+
+desc = """
+X desktop environment.
+"""
+
+deps = """
+mini-xserver
+utils
+utils-x
+#dm
+print
+#internet
+#sound-video
+#office
+font
+#graphic
+#xfce
+"""
+packages = """
+"""
+ghostbsd_deps="""
+ports
+#xfce
+common
+"""
+

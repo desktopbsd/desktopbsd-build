@@ -1,0 +1,17 @@
+
+desc = """
+no X .
+"""
+
+deps = """
+utils
+print
+drivers
+"""
+packages = """
+"""
+ghostbsd_deps="""
+ports
+common
+"""
+

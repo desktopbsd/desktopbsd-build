@@ -1,0 +1,17 @@
+desc = """
+GhostBSD common settings
+"""
+
+packages = """
+#desktopbsd-grub2-settings
+#desktopbsd-icons
+desktopbsd-installed-settings
+desktopbsd-live-settings
+#desktopbsd-mate-themes
+desktopbsd-artwork
+#gbi
+#update-station
+"""
+
+settings="""
+"""

@@ -1,0 +1,10 @@
+desc = """
+	Internet tool
+"""
+packages="""
+pidgin
+transmission
+firefox-i18n
+thunderbird-i18n
+hexchat
+"""

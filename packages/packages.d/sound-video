@@ -1,0 +1,12 @@
+desc = """
+	Sound and Video.
+"""
+packages="""
+exaile
+gnome-mplayer
+xfburn
+cheese
+gstreamer-plugins-neon
+gstreamer-plugins-soup
+pulseaudio
+"""
