@@ -25,7 +25,7 @@ cd ${BASEDIR} && tar -cpzf ${BASEDIR}/dist/etc.tgz etc
 
 make_standard_iso()
 {
-GHOSTBSD_LABEL=DESKTOPBSD
+GHOSTBSD_LABEL=`echo $GHOSTBSD_LABEL | tr '[:lower:]' '[:upper:]'`
 echo "/dev/iso9660/$GHOSTBSD_LABEL / cd9660 ro 0 0" > ${BASEDIR}/etc/fstab 
 echo "### Running makefs to create ISO ###"
 bootable="-o bootimage=i386;${BASEDIR}/boot/cdboot -o no-emul-boot"

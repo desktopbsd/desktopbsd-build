@@ -15,13 +15,10 @@ if [ -z "${LOGFILE:-}" ]; then
     exit 1
 fi
 
-# UFS label
-
-GHOSTBSD_LABEL=${GHOSTBSD_LABEL:-"DESKTOPBSD"} 
-
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export PATH
 
+GHOSTBSD_LABEL=`echo $GHOSTBSD_LABEL | tr '[:lower:]' '[:upper:]'`
 echo "/dev/ufs/${GHOSTBSD_LABEL} / ufs ro,noatime 1 1" > ${BASEDIR}/etc/fstab
 echo "proc /proc procfs rw 0 0" >> ${BASEDIR}/etc/fstab 
 echo "linproc /compat/linux/proc linprocfs rw 0 0" >> ${BASEDIR}/etc/fstab
