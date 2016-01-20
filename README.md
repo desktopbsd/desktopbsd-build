@@ -32,7 +32,7 @@ Now that the whole configuration is done, all you need to push the button:
    ./make_gnome_amd64_iso
 
 This will build the whole system and the .iso image. To build the USB .img, you will 
-additionally want to issue the below commands:
+additionally want to issue the following commands:
 
    ./make_gnome_amd64_img
 
