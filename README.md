@@ -37,7 +37,7 @@ additionally want to issue the following commands:
    ./make_gnome_amd64_img
 
 Now all we need to do is clean up after building (remember you can only build back after 
-issuing the below commands):
+issuing the following commands):
 
    cd desktopbsd-build/clscripts
    clean_gnome_amd64
