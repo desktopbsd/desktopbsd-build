@@ -1,15 +1,15 @@
-ghostbsd-build
+desktopbsd-build
 ==============
 ## Introduction
-GhostBSD build toolkit is directly derivated from FreeSBIE toolkit, but most of the code changed.The ghostbsd-build is been designed to allow developers to building both, i386 and amd64 architectures on amd64 architectures. The ghostbsd-build to can build GhostBSD on FreeBSD, PCBSD and GhostBSD.
+The DesktopBSD build toolkit has been derived directly from the GhostBSD build toolkit.  GhostBSD build toolkit is directly derived from FreeSBIE toolkit, but most of the code changed.  The ghostbsd-build toolkit has been designed to allow developers to building both, i386 and amd64 architectures on amd64 architectures. The ghostbsd-build to can build GhostBSD on FreeBSD, PCBSD and GhostBSD.
 ## Installing ghostbsd-build
 First, you need to install git as root user using su or sudo.
 ```
 pkg install git
 ```
-Second thing is to download GhostBSD Build Toolkit.
+Second thing is to download DesktopBSD Build Toolkit.
 ```
-git clone https://github.com/GhostBSD/ghostbsd-build.git
+git clone https://github.com/DesktopBSD/desktopbsd-build.git
 ```
 
 ## Configuring the system
@@ -28,15 +28,16 @@ rebuild your kernel and world every time unless you’ve committed significant c
 
 Now that the whole configuration is done, all you need to push the button:
 
-   cd ghostbsd-build/mkscripts
+   cd desktopbsd-build/mkscripts
+   ./make_gnome_amd64_iso
 
 This will build the whole system and the .iso image. To build the USB .img, you will 
 additionally want to issue the below commands:
 
-
-   make img
+   ./make_gnome_amd64_img
 
 Now all we need to do is clean up after building (remember you can only build back after 
 issuing the below commands):
 
-   sudo make clean cleandir
+   cd desktopbsd-build/clscripts
+   clean_gnome_amd64
