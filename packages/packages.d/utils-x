@@ -11,4 +11,5 @@ mesa-demos
 # zenity for ghostbsd-irc
 zenity
 octopkg
+wifimgr
 """
