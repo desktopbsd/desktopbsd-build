@@ -1,7 +1,7 @@
 desktopbsd-build
 ==============
 ## Introduction
-The DesktopBSD build toolkit has been derived directly from the GhostBSD build toolkit.  GhostBSD build toolkit is directly derived from FreeSBIE toolkit, but most of the code changed.  The ghostbsd-build toolkit has been designed to allow developers to building both, i386 and amd64 architectures on amd64 architectures. The ghostbsd-build to can build GhostBSD on FreeBSD, PCBSD and GhostBSD.
+The DesktopBSD build toolkit has been derived directly from the GhostBSD build toolkit.  GhostBSD build toolkit is directly derived from FreeSBIE toolkit, but most of the code has changed.  It has been further modified to acommidate the DesktopBSD project.
 ## Installing desktopbsd-build
 First, you need to install git as root user using su or sudo.
 ```
