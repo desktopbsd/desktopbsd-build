@@ -11,29 +11,33 @@ Second thing is to download DesktopBSD Build Toolkit.
 ```
 git clone https://github.com/DesktopBSD/desktopbsd-build.git
 ```
-
 ## Building the system
-
 Now that the whole configuration is done, all you need to push the button:
-
 ```
    cd desktopbsd-build/mkscripts
 ```   
-
 ```   
    ./make_gnome_amd64_iso
 ```
-
 This will build the whole system and the .iso image. To build the USB .img, you will 
 additionally want to issue the following commands:
-
 ```
    ./make_gnome_amd64_img
 ```
+##Troubleshooting
+Logs are stored in:
+```
+/usr/obj/gblogs/amd64/gnome
+```
 
+##Accessing the images
+All resulting images will be stored in:
+```
+/usr/obj/amd64/gnome
+```
+###Clean up
 Now all we need to do is clean up after building (remember you can only build back after 
 issuing the following commands):
-
 ````
    cd desktopbsd-build/clscripts
 ```
