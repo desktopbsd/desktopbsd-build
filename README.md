@@ -35,7 +35,7 @@ All resulting images will be stored in:
 ```
 /usr/obj/amd64/gnome
 ```
-###Clean up the build environment
+###Cleaning up the build environment
 Now all we need to do is clean up after building (remember you can only build back after 
 issuing the following commands):
 ````
