@@ -1,7 +1,7 @@
 desktopbsd-build
 ==============
 ## Introduction
-The DesktopBSD build toolkit has been derived directly from the GhostBSD build toolkit.  GhostBSD build toolkit is directly derived from FreeSBIE toolkit, but most of the code has changed.  It has been further modified to acommidate the DesktopBSD project.
+The DesktopBSD build toolkit has been derived directly from the GhostBSD build toolkit.  GhostBSD build toolkit is directly derived from FreeSBIE toolkit, but most of the code has changed.  It has been further modified to accommodate the DesktopBSD project.
 ## Installing desktopbsd-build
 First, you need to install git as root user using su or sudo.
 ```
