@@ -12,18 +12,6 @@ Second thing is to download DesktopBSD Build Toolkit.
 git clone https://github.com/DesktopBSD/desktopbsd-build.git
 ```
 
-## Configuring the system
-
-Have a look in ghostbsd-build/conf/ghostbsd.defaults.conf - you will notice very important lines 
-below:
-```
-   NO_BUILDWORLD=YES
-   NO_BUILDKERNEL=YES
-```
-Comment these two lines the first time you run the building process for each Architectures. The next time you run it, 
-you can uncomment them - it will then save you quite some time (you simply do not need to 
-rebuild your kernel and world every time unless you’ve committed significant changes to them).
-
 ## Building the system
 
 Now that the whole configuration is done, all you need to push the button:
