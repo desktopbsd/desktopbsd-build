@@ -46,5 +46,10 @@ additionally want to issue the following commands:
 Now all we need to do is clean up after building (remember you can only build back after 
 issuing the following commands):
 
+````
    cd desktopbsd-build/clscripts
+```
+
+```
    clean_gnome_amd64
+```
