@@ -43,5 +43,5 @@ issuing the following commands):
 ```
 
 ```
-   clean_gnome_amd64
+   ./clean_gnome_amd64
 ```
