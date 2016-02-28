@@ -5,11 +5,11 @@ The DesktopBSD build toolkit has been derived directly from the GhostBSD build t
 ## Installing desktopbsd-build
 First, you need to install git as root user using su or sudo.
 ```
-pkg install git
+   pkg install git
 ```
 Second thing is to download DesktopBSD Build Toolkit.
 ```
-git clone https://github.com/DesktopBSD/desktopbsd-build.git
+   git clone https://github.com/DesktopBSD/desktopbsd-build.git
 ```
 ## Building the system
 Now that the whole configuration is done, all you need to push the button:
@@ -27,13 +27,13 @@ additionally want to issue the following commands:
 ##Troubleshooting
 Logs are stored in:
 ```
-/usr/obj/gblogs/amd64/gnome
+   /usr/obj/gblogs/amd64/gnome
 ```
 
 ##Accessing the images
 All resulting images will be stored in:
 ```
-/usr/obj/amd64/gnome
+   /usr/obj/amd64/gnome
 ```
 ###Cleaning up the build environment
 Now all we need to do is clean up after building (remember you can only build back after 
