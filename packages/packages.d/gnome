@@ -17,7 +17,6 @@ packages = """
     gcalctool
     gconf-editor
     gdm3
-    geary
     gedit
     gengetopt
     gkbd-capplet
