@@ -11,7 +11,7 @@ packages = """
     dconf-editor
     dconf-tools
     eog
-    # new 3.12 apps: empathy, polari (todo: siduction settings), gnome-boxes, gnome-logs, gnome-photos, gnome-sushi, geary
+    # new 3.12 apps: empathy, polari (todo: siduction settings), gnome-boxes, gnome-logs, gnome-photos, gnome-sushi
     evince
     file-roller
     gcalctool
