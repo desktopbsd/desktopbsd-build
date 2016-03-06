@@ -73,8 +73,8 @@ default_ghostbsd_rc_conf()
   cp  ${BASEDIR}/etc/rc.conf ${BASEDIR}/etc/rc.conf.ghostbsd
 }
 
-remove_desktop_entries
-clean_desktop_files
+# remove_desktop_entries
+# clean_desktop_files
 # rm_fbsd_pcsysinstall
 cursor_theme
 # dm_enable
