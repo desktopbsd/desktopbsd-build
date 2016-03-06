@@ -49,5 +49,5 @@ fi
 
 chroot ${BASEDIR} pw mod user ${GHOSTBSD_USER} -w none
 
+chroot ${BASEDIR} su ${GHOSTBSD_USER} -c /usr/local/bin/xdg-user-dirs-update
 chroot ${BASEDIR} su ${GHOSTBSD_USER} -c /usr/local/share/${GHOSTBSD_USER}/common-live-settings/config-live-settings
-
