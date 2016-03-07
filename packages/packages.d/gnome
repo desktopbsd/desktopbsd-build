@@ -56,7 +56,6 @@ packages = """
     gnome-shell-extensions
     gnome-sushi
     gnome-system-log
-    gnome-terminal
     gnome-tweak-tool
     gnome-user-guide
     gnome-user-share
