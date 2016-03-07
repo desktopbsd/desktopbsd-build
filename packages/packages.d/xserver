@@ -5,7 +5,7 @@ deps="""
 """
 packages="""
 xorg
-#virtualbox-ose-additions
+virtualbox-ose-additions
 cursor-dmz-theme
 setxkbmap
 xrandr
