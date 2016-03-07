@@ -4,7 +4,7 @@ desc = """
 packages="""
 pidgin
 transmission
-firefox-i18n
+chromium
 thunderbird-i18n
 hexchat
 """
