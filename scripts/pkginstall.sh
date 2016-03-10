@@ -93,11 +93,15 @@ cat > ${BASEDIR}/mnt/addpkg.sh << "EOF"
 FORCE_PKG_REGISTER=true
 export FORCE_PKG_REGISTER
 
-# builds pkg from ports to avoid Y/N question
 ln -sf /dist/ports /usr/ports
-cd /usr/ports/ports-mgmt/pkg
-make
-make install
+
+# builds pkg from ports to avoid Y/N question
+#cd /usr/ports/ports-mgmt/pkg
+#make
+#make install
+
+# bootstrap pkg using env
+env ASSUME_ALWAYS_YES=YES pkg bootstrap
 
 # pkg install part
 cd /mnt
