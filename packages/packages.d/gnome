@@ -16,7 +16,7 @@ packages = """
     file-roller
     gcalctool
     gconf-editor
-    gdm3
+    #gdm3
     gedit
     gengetopt
     gkbd-capplet

@@ -381,9 +381,3 @@ device		vmx			# VMware VMXNET3 Ethernet
 
 # The crypto framework is required by IPSEC
 device		crypto			# Required by IPSEC
-
-
-options PAX
-options PAX_ASLR
-options PAX_HARDENING
-options PAX_SYSCTLS
