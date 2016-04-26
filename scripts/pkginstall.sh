@@ -15,12 +15,8 @@ if [ -z "${LOGFILE:-}" ]; then
   exit 1
 fi
 
-PKGFILE=${PKGFILE:-${LOCALDIR}/conf/${PACK_PROFILE}-packages};
-
-#if [ ! -f ${PKGFILE} ]; then
- # return
-#fi
-touch ${PKGFILE}
+pkgfile=${pkgfile:-${LOCALDIR}/conf/${PACK_PROFILE}-packages};
+touch ${pkgfile}
 
 # Search main file package for include dependecies
 # and build an depends file ( depends )
@@ -66,13 +62,14 @@ fi
 cp /etc/resolv.conf ${BASEDIR}/etc/resolv.conf
 
 PLOGFILE=".log_pkginstall"
-echo "Installing packages listed in ${PKGFILE}"
+echo "Installing packages listed in ${pkgfile}"
 
 # cp resolv.conf for fetching packages
-cp $PKGFILE ${BASEDIR}/mnt
+cp $pkgfile ${BASEDIR}/mnt
 
 sed -i '' 's@signature_type: "fingerprints"@#signature_type: "fingerprints"@g' ${BASEDIR}/etc/pkg/FreeBSD.conf
 
+if ! ${USE_DISTROREPO} ; then
 # prepares ports file backend an mounts it over /dist/ports
 PSIZE=$(echo "${PORTS_SIZE}*1024^2" | bc | cut -d . -f1)
 dd if=/dev/zero of=${BASEDIR}/ports.ufs bs=1k count=1 seek=$((${PSIZE} - 1))
@@ -85,6 +82,8 @@ mount -o noatime /dev/$PDEVICE  ${BASEDIR}/dist/ports
 # prepares ports tree
 portsnap fetch
 portsnap extract -p ${BASEDIR}/dist/ports
+ln -sf /dist/ports /usr/ports
+fi
 
 # prepares addpkg.sh script to add packages under chroot
 cat > ${BASEDIR}/mnt/addpkg.sh << "EOF"
@@ -92,8 +91,6 @@ cat > ${BASEDIR}/mnt/addpkg.sh << "EOF"
 
 FORCE_PKG_REGISTER=true
 export FORCE_PKG_REGISTER
-
-ln -sf /dist/ports /usr/ports
 
 # builds pkg from ports to avoid Y/N question
 #cd /usr/ports/ports-mgmt/pkg

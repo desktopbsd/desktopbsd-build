@@ -58,10 +58,10 @@ echo "/dev/iso9660/$GHOSTBSD_LABEL / cd9660 ro 0 0" > $BASEDIR/etc/fstab
 
 # Borrowed from freebsd release scripts
 # Make EFI system partition (should be done with makefs in the future)
-dd if=/dev/zero of=efiboot.img bs=4k count=100
+dd if=/dev/zero of=efiboot.img bs=4k count=150
 device=`mdconfig -a -t vnode -f efiboot.img`
 newfs_msdos -F 12 -m 0xf8 /dev/$device
-mkdir efi
+mkdir -p efi
 mount -t msdosfs /dev/$device efi
 mkdir -p efi/efi/boot
 cp ${BASEDIR}/boot/loader.efi efi/efi/boot/bootx64.efi

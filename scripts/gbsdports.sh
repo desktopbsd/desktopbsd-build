@@ -50,6 +50,8 @@ if [ -f ${LOCALDIR}/conf/${PACK_PROFILE}-gpackage ] ; then
   rm -f ${LOCALDIR}/packages/${PACK_PROFILE}-gdepends
 fi
 
+cp -f ${PKGFILE} ${BASEDIR}/mnt
+
 if ! ${USE_JAILS} ; then
     if [ -z "$(mount | grep ${BASEDIR}/var/run)" ]; then
         mount_nullfs /var/run ${BASEDIR}/var/run
@@ -57,6 +59,8 @@ if ! ${USE_JAILS} ; then
 fi
 cp -af /etc/resolv.conf ${BASEDIR}/etc
 
+install_and_build_dports()
+{
 # Compiling ghostbsd ports
 if [ -d ${BASEDIR}/ports ]; then
   rm -Rf ${BASEDIR}/ports
@@ -104,8 +108,88 @@ chrootcmd="chroot ${BASEDIR} sh /mnt/portsbuild.sh"
 $chrootcmd
 
 rm -Rf ${BASEDIR}/ports
+}
+
+install_repo_dports()
+{
+# Make /usr/local/etc/pkg/repos dir to store needed repos
+mkdir -p ${BASEDIR}/usr/local/etc/pkg/repos
+
+# Make certificate dir for distro packages and fetch needed cert
+mkdir -p ${BASEDIR}/usr/local/etc/ssl/certs
+cd ${BASEDIR}/usr/local/etc/ssl/certs
+fetch http://skynet.desktopbsd.net/certs/poudriere.cert
+cd .
+
+### Repos creation
+cat > ${BASEDIR}/usr/local/etc/pkg/repos/DesktopBSD.conf << "EOF"
+# To disable this repository, instead of modifying or removing this file,
+# create a /usr/local/etc/pkg/repos/DesktopBSD.conf file:
+#
+#   echo "DesktopBSD: { enabled: no }" > /usr/local/etc/pkg/repos/DesktopBSD.conf
+
+DesktopBSD: {
+  url: "pkg+http://skynet.desktopbsd.net/packages/10amd64-2016Q2",
+  mirror_type: "srv",
+  signature_type: "pubkey",
+  pubkey: "/usr/local/etc/ssl/certs/poudriere.cert",
+  enabled: yes
+}
+EOF
+
+cat > ${BASEDIR}/usr/local/etc/pkg/repos/FreeBSD.conf << "EOF"
+# To disable this repository, instead of modifying or removing this file,
+# create a /usr/local/etc/pkg/repos/FreeBSD.conf file:
+#
+#   echo "FreeBSD: { enabled: no }" > /usr/local/etc/pkg/repos/FreeBSD.conf
+
+FreeBSD: {
+  enabled: yes
+}
+EOF
+
+cat > ${BASEDIR}/mnt/addpkg.sh << "EOF"
+#!/bin/sh 
+
+pkgfile="${PACK_PROFILE}-ghostbsd"
+FORCE_PKG_REGISTER=true
+export FORCE_PKG_REGISTER
+PLOGFILE=".log_portsinstall"
+pkgaddcmd="pkg install -y "
+
+#updates package list
+pkg update
+
+cd /mnt
+
+while read pkgc; do
+    if [ -n "${pkgc}" ] ; then
+    echo "Installing package $pkgc"
+    echo "Running $pkgaddcmd ${pkgc}" >> ${PLOGFILE} 2>&1
+    $pkgaddcmd $pkgc >> ${PLOGFILE} 2>&1
+    fi
+done < $pkgfile
+
+rm addpkg.sh
+rm $pkgfile
+EOF
+
+# Install ghostbsd ports from repo in chroot 
+chrootcmd="chroot ${BASEDIR} sh /mnt/addpkg.sh"
+$chrootcmd
+
+# Reenable FreeBSD repo
+rm -f ${BASEDIR}/usr/local/etc/pkg/repos/FreeBSD.conf
+}
+
+if ! ${USE_DISTROREPO} ; then
+    install_and_build_dports
+else
+    install_repo_dports
+fi
 
 # save logfile where should be
+PLOGFILE=".log_portsinstall"
 mv ${BASEDIR}/mnt/${PLOGFILE} ${MAKEOBJDIRPREFIX}/${LOCALDIR}
 
 # umount /var/run if not using jails
@@ -115,3 +199,4 @@ if ! ${USE_JAILS} ; then
     fi
 fi
 rm ${BASEDIR}/etc/resolv.conf
+
