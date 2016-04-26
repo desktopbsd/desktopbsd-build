@@ -82,6 +82,7 @@ pkgfile="${PACK_PROFILE}-ghostbsd"
 FORCE_PKG_REGISTER=true
 export FORCE_PKG_REGISTER
 PLOGFILE=".log_portsinstall"
+ln -sf /dist/ports /usr/ports
 
 cd /mnt
 

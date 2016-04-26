@@ -71,18 +71,39 @@ sed -i '' 's@signature_type: "fingerprints"@#signature_type: "fingerprints"@g' $
 
 if ! ${USE_DISTROREPO} ; then
 # prepares ports file backend an mounts it over /dist/ports
-PSIZE=$(echo "${PORTS_SIZE}*1024^2" | bc | cut -d . -f1)
-dd if=/dev/zero of=${BASEDIR}/ports.ufs bs=1k count=1 seek=$((${PSIZE} - 1))
-PDEVICE=$(mdconfig -a -t vnode -f ${BASEDIR}/ports.ufs)
-echo $PDEVICE >${BASEDIR}/pdevice
-newfs -o space /dev/$PDEVICE
-mkdir -p ${BASEDIR}/dist/ports
-mount -o noatime /dev/$PDEVICE  ${BASEDIR}/dist/ports
+    PSIZE=$(echo "${PORTS_SIZE}*1024^2" | bc | cut -d . -f1)
+    dd if=/dev/zero of=${BASEDIR}/ports.ufs bs=1k count=1 seek=$((${PSIZE} - 1))
+    PDEVICE=$(mdconfig -a -t vnode -f ${BASEDIR}/ports.ufs)
+    echo $PDEVICE >${BASEDIR}/pdevice
+    newfs -o space /dev/$PDEVICE
+    mkdir -p ${BASEDIR}/dist/ports
+    mount -o noatime /dev/$PDEVICE  ${BASEDIR}/dist/ports
 
 # prepares ports tree
 portsnap fetch
 portsnap extract -p ${BASEDIR}/dist/ports
+
+# prepares buildpkg.sh script to add packages under chroot
+cat > ${BASEDIR}/mnt/buildpkg.sh << "EOF"
+#!/bin/sh 
+
+FORCE_PKG_REGISTER=true
+export FORCE_PKG_REGISTER
 ln -sf /dist/ports /usr/ports
+
+# builds pkg from ports to avoid Y/N question
+cd /usr/ports/ports-mgmt/pkg
+make
+make install
+
+# pkg install part
+cd /mnt
+rm buildpkg.sh
+EOF
+
+# run addpkg.sh in chroot to add packages
+chrootcmd="chroot ${BASEDIR} sh /mnt/buildpkg.sh"
+$chrootcmd
 fi
 
 # prepares addpkg.sh script to add packages under chroot
@@ -91,6 +112,7 @@ cat > ${BASEDIR}/mnt/addpkg.sh << "EOF"
 
 FORCE_PKG_REGISTER=true
 export FORCE_PKG_REGISTER
+#ln -sf /dist/ports /usr/ports
 
 # builds pkg from ports to avoid Y/N question
 #cd /usr/ports/ports-mgmt/pkg
