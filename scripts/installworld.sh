@@ -7,7 +7,7 @@
 # $FreeBSD$
 # $Id: installworld.sh,v 1.8 2006/06/11 18:29:50 saturnero Exp $
 
-set -e -u
+set  -e -u
 
 if [ -z "${LOGFILE:-}" ]; then
     echo "This script can't run standalone."
@@ -15,7 +15,8 @@ if [ -z "${LOGFILE:-}" ]; then
     exit 1
 fi
 
-jail_name=${PACK_PROFILE}${ARCH}
+JAILFS=$(echo ${BASEDIR} | cut -d / -f 3,3)
+jail_name=${JAILFS}${PACK_PROFILE}${ARCH}
 
 mkmd_device()
 {
@@ -45,10 +46,10 @@ if [ "${MD_BACKEND}" = "file" ]
     then
         FSSIZE=$(echo "${BACKEND_SIZE}*1024^2" | bc | cut -d . -f1)
         dd if=/dev/zero of=${UFSFILE} bs=1k count=1 seek=$((${FSSIZE} - 1))
-        DEVICE=$(mdconfig -a -t vnode -f ${UFSFILE})
+        DEVICE=$(mdconfig -o cluster -o async -S 4096 -a -t vnode -f ${UFSFILE})
     else
         FSSIZE=$(echo "${USR_SIZE}*1024^2" | bc | cut -d . -f1)
-        DEVICE=$(mdconfig -a -t malloc -s ${FSSIZE}k)
+        DEVICE=$(mdconfig -o cluster -o async -S 4096 -a -t malloc -s ${FSSIZE}k)
         dd if=/dev/zero of=/dev/${DEVICE} bs=1k count=1 seek=$((${FSSIZE} - 1))
 fi
 
@@ -57,6 +58,7 @@ echo ${DEVICE} > ${BASEDIR}/mddevice
 newfs -o space /dev/${DEVICE} 
 mkdir -p ${MOUNTPOINT}
 mount -o noatime /dev/${DEVICE} ${MOUNTPOINT}
+mkdir -p ${BASEDIR}/usr/src/sys
 }
 
 install_built_world()
@@ -103,10 +105,10 @@ fi
 jail_add()
 {
 cat >> /etc/jail.conf << EOF
-${PACK_PROFILE}${ARCH} {
+${jail_name}{
 path = ${BASEDIR};
 mount.devfs;
-host.hostname = www.${PACK_PROFILE}${ARCH}.org;
+host.hostname = www.${jail_name}.org;
 exec.start = "/bin/sh /etc/rc";
 exec.stop = "/bin/sh /etc/rc.shutdown";
 }
@@ -115,44 +117,33 @@ EOF
 
 jail_list_add()
 {
-get_jail=$(grep $jail_name /etc/jail.conf| grep -v host.hostname |cut -d \  -f1 )
-jail_dir=$(grep $jail_name /etc/jail.conf | grep path | cut -d / -f 3,3)
-isalready=false
-ispath=false
-
-if [ -n $jail_dir ] ; then
-    for djail in $jail_dir; do
-        if [ "/usr/$djail" = "$BASEDIR" ]; then 
-            ispath=true
-        fi
-    done
+if [ ! -f /etc/jail.conf ] ; then
+    touch /etc/jail.conf
 fi
 
-if [ -n $get_jail -a "$ispath" = "true" ] ; then
-    for ijail in $get_jail; do
-        if [ "$ijail" = "$jail_name" ]; then 
-            isalready=true
-        fi
-    done
-fi
+set +e
 
-if [ "$isalready" = "false" -o -z $get_jail ]  ;then
-   jail_add
-else
+isalready=`$(fgrep "^$jail_name" /etc/jail.conf)`
+if [ -n "$isalready" ] ; then
     echo "jail already exists and won't be added"
-    break
+else
+    jail_add
+    #break
 fi
 }
 
 
 # makes initial memory device to install over it
-mkmd_device
-
-if [ -n "${FETCH_FREEBSDBASE:-}" ]; then
-    install_fetched_freebsd
-else
-    install_built_world
+if [ ! -f ${BASEDIR}/mddevice ]; then
+    mkmd_device
+    if [ -n "${FETCH_FREEBSDBASE:-}" ]; then
+        install_fetched_freebsd
+    else
+        install_built_world
 fi
+fi
+
+
 
 if [ ! -d ${BASEDIR}/usr/local/etc/default ]; then
     mkdir -p ${BASEDIR}/usr/local/etc/default
