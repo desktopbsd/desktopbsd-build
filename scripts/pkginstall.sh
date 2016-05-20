@@ -49,8 +49,8 @@ for left_files in ports ghostbsd pcbsd gbi ; do
     rm -Rf ${BASEDIR}/${left_files}
 done
 
-if [ -f ${BASEDIR}/usr/local/etc/repos/GhostBSD.conf ]; then
-    rm -f  ${BASEDIR}/usr/local/etc/repos/GhostBSD.conf
+if [ -f ${BASEDIR}/usr/local/etc/repos/DesktopBSD.conf ]; then
+    rm -f  ${BASEDIR}/usr/local/etc/repos/DesktopBSD.conf
 fi
 
 #mounts ${BASEDIR}/var/run because it's needed when building ports in chroot
@@ -75,7 +75,7 @@ if [ ! -d ${BASEDIR}/dist/ports ]; then
 # prepares ports file backend an mounts it over /dist/ports
     PSIZE=$(echo "${PORTS_SIZE}*1024^2" | bc | cut -d . -f1)
     dd if=/dev/zero of=${BASEDIR}/ports.ufs bs=1k count=1 seek=$((${PSIZE} - 1))
-    PDEVICE=$(mdconfig -a -t vnode -f ${BASEDIR}/ports.ufs)
+    PDEVICE=$(mdconfig -o async -o cluster -S 4096 -a -t vnode -f ${BASEDIR}/ports.ufs)
     echo $PDEVICE >${BASEDIR}/pdevice
     newfs -o space /dev/$PDEVICE
     mkdir -p ${BASEDIR}/dist/ports
@@ -85,6 +85,7 @@ if [ ! -d ${BASEDIR}/dist/ports ]; then
     portsnap fetch
     portsnap extract -p ${BASEDIR}/dist/ports
 fi
+
 buildpkg()
 {
 # prepares buildpkg.sh script to add packages under chroot

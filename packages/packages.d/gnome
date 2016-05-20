@@ -10,7 +10,6 @@ packages = """
     evince
     file-roller
     gconf-editor
-    gdm
     gedit
     gengetopt
     gnome-backgrounds
