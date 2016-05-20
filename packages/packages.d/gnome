@@ -1,5 +1,5 @@
 desc = """
-    GhostBSD GNOME desktop environment
+    DesktopBSD GNOME desktop environment
 """
 
 packages = """
@@ -7,14 +7,12 @@ packages = """
     cups-pk-helper
     dconf-editor
     eog
-    # new 3.12 apps: empathy, polari (todo: siduction settings), gnome-boxes, gnome-logs, gnome-photos, gnome-sushi
     evince
     file-roller
     gconf-editor
     gdm
     gedit
     gengetopt
-    #gnome3-lite
     gnome-backgrounds
     gnome-calculator
     gnome-control-center
