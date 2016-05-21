@@ -122,13 +122,12 @@ if [ ! -f /etc/jail.conf ] ; then
 fi
 
 set +e
+isalready=$(grep "^${jail_name}" /etc/jail.conf)
 
-isalready=`$(fgrep "^$jail_name" /etc/jail.conf)`
 if [ -n "$isalready" ] ; then
     echo "jail already exists and won't be added"
 else
     jail_add
-    #break
 fi
 }
 
