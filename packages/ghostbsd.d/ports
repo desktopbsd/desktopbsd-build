@@ -8,6 +8,8 @@ ssft
 desktopbsd-irc
 inxi
 networkmgr
+fbsdupdatecheck
+fbsdpkgupdate
 """
 
 settings="""

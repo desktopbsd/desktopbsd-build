@@ -8,7 +8,7 @@ dpkg
 #fish
 freedesktop-sound-theme
 #fusefs-ntfs
-#fusefs-ext4fs
+#fusefs-ext4fuse
 # gawk needed by inxi
 gawk
 # gmake needed by network manager
@@ -17,14 +17,12 @@ gmake
 grub2-pcbsd
 grub2-efi
 #nano
-#ntfs-3g
 #ksh93
-#mc
+mc
 portupgrade
 py27-gobject
 py27-webkitgtk
 py27-pexpect
-py27-distutils-extra
 rsync
 sudo
 #vim
