@@ -99,19 +99,3 @@ EOF
 chroot ${BASEDIR} sh /config.sh
 rm -f ${BASEDIR}/config.sh
 rm -rf ${BASEDIR}/operator
-
-# installing GhostBSD wallpapers
-if [ ! -d ${BASEDIR}/update-station ]; then
-  echo "# Downloading update-station from GitHub #"
-  git clone https://github.com/GhostBSD/update-station.git ${BASEDIR}/update-station >/dev/null 2>&1
-fi
-
-cat > ${BASEDIR}/config.sh << 'EOF'
-#!/bin/sh
-cd /update-station
-python setup.py install >/dev/null 2>&1
-EOF
-
-chroot ${BASEDIR} sh /config.sh
-rm -f ${BASEDIR}/config.sh
-rm -rf ${BASEDIR}/update-station
