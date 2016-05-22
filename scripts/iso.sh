@@ -39,6 +39,7 @@ echo "standard iso done"
 
 make_grub_iso()
 {
+GHOSTBSD_LABEL=`echo $GHOSTBSD_LABEL | tr '[:lower:]' '[:upper:]'`
 # Reference for hybrid DVD/USB image
 # Use GRUB to create the hybrid DVD/USB image
 echo "==> Creating hybrid iso"
