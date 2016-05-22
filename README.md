@@ -3,9 +3,9 @@ desktopbsd-build
 ## Introduction
 The DesktopBSD build toolkit has been derived directly from the GhostBSD build toolkit.  GhostBSD build toolkit is directly derived from FreeSBIE toolkit, but most of the code has changed.  It has been further modified to accommodate the DesktopBSD project.
 ## Installing desktopbsd-build
-First, you need to install git as root user using su or sudo.
+First, you need to install git, grub2-pcbsd and grub2-efi as root user using su or sudo.
 ```
-   pkg install git
+   pkg install git grub2-pcbsd grub2-efi
 ```
 Second thing is to download DesktopBSD Build Toolkit.
 ```
