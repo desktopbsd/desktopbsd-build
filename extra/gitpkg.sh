@@ -77,7 +77,7 @@ rm -f ${BASEDIR}/config.sh
 # chroot ${BASEDIR} sh /config.sh
 # rm -f ${BASEDIR}/config.sh
 
-rm -rf ${BASEDIR}/pcbsd
+rm -rf ${BASEDIR}/pc-sysinstall
 rm -rf ${BASEDIR}/gbi
 
 # installing GhostBSD wallpapers
