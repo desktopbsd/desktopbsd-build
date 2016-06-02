@@ -14,19 +14,15 @@ if [ ! -f "/usr/local/bin/git" ]; then
 fi
 
 # Installing pc-sysinstall and ghostbsd installer
-if [ ! -d ${BASEDIR}/pcbsd ]; then
-  echo "Downloading pcbsd tools from GitHub"
-#  git clone https://github.com/GhostBSD/pcbsd.git ${BASEDIR}/pcbsd >/dev/null 2>&1
-   fetch https://github.com/desktopbsd/pcbsd/archive/master.zip -o ${BASEDIR}/master.zip >/dev/null 2>&1
-   unzip ${BASEDIR}/master.zip -d ${BASEDIR} >/dev/null 2>&1
-   mv ${BASEDIR}/pcbsd-master ${BASEDIR}/pcbsd
-   rm ${BASEDIR}/master.zip
+if [ ! -d ${BASEDIR}/pc-sysinstall ]; then
+  echo "Downloading pc-sysinstall tools from GitHub"
+git clone https://github.com/desktopbsd/pc-sysinstall.git ${BASEDIR}/pc-sysinstall >/dev/null 2>&1
 fi
 
 cat > ${BASEDIR}/config.sh << 'EOF'
 #!/bin/sh
 echo "installing pc-syinstall"
-cd /pcbsd/src-sh/pcbsd-utils/pc-sysinstall
+cd /pc-sysinstall
 sh install.sh >/dev/null 2>&1
 EOF
 
