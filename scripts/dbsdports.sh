@@ -5,7 +5,7 @@
 # See COPYING for licence terms.
 #
 # $DesktopBSD$
-# $Id: gbsdports.sh,v 1.7 Thu Jun 23 10:04:31 AST 2015 Angelescu Ovidiu
+# $Id: dbsdports.sh,v 1.7 Thu Jun 23 10:04:31 AST 2015 Angelescu Ovidiu
 
 
 if [ -z "${LOGFILE:-}" ]; then

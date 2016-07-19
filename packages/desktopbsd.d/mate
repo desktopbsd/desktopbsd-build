@@ -6,6 +6,7 @@ packages = """
 desktopbsd-slim-theme
 mate-installed-settings
 mate-live-settings
+desktopbsd-mate-themes
 station-tweak
 """
 

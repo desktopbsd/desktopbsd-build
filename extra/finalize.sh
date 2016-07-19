@@ -46,14 +46,6 @@ rm_fbsd_pcsysinstall()
   rm -rf ${BASEDIR}/usr/share/pc-sysinstall
 }
 
-dm_enable()
-{
-# enable display manager if installed
-if [ -e $(which pcdm) ] ; then 
-  sed -i '' 's@#pcdm_enable="NO"@gdm_enable="YES"@g' ${BASEDIR}/etc/rc.conf
-fi
-}
-
 clean_desktop_files()
 {
 # Remove Gnome and Mate from ShowOnly in *.desktop
@@ -150,7 +142,6 @@ remove_desktop_entries
 clean_desktop_files
 # rm_fbsd_pcsysinstall
 cursor_theme
-# dm_enable
 default_desktopbsd_rc_conf
 set_sudoers
 config_packages

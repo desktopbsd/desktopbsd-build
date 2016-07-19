@@ -22,6 +22,5 @@ desktopbsd_deps="""
 ports
 mate
 common
-gtk-gcommon
 """
 

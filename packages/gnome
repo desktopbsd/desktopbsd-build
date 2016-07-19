@@ -20,6 +20,5 @@ desktopbsd_deps="""
 ports
 gnome
 common
-gtk-gcommon
 """
 
