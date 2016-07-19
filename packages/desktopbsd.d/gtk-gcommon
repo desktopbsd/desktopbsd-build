@@ -1,0 +1,10 @@
+desc = """
+DesktopBSD gtk flavours common settings
+"""
+
+packages = """
+desktopbsd-mate-themes
+"""
+
+settings="""
+"""

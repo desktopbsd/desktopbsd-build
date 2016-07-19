@@ -1,0 +1,13 @@
+desc = """
+DesktopBSD KDE settings
+"""
+
+packages = """
+desktopbsd-kdm-theme
+desktopbsd-ksplash-theme
+kde-installed-settings
+kde-live-settings
+"""
+
+settings = """
+"""

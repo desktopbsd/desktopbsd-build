@@ -1,0 +1,10 @@
+desc = """
+DesktopBSD xorg settings
+"""
+
+packages = """
+desktopbsd-slim-theme
+"""
+
+settings="""
+"""

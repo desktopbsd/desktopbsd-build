@@ -1,0 +1,13 @@
+desc = """
+DesktopBSD mate settings
+"""
+
+packages = """
+desktopbsd-slim-theme
+mate-installed-settings
+mate-live-settings
+station-tweak
+"""
+
+settings="""
+"""

@@ -1,0 +1,35 @@
+desc = """
+KDE desktop environment
+"""
+
+packages = """
+kde-baseapps
+kde-base-artwork
+kde-dev-scripts
+kde-dev-utils
+kde-runtime
+#kde-wallpapers
+kde-workspace
+kde4-icons-oxygen
+kde4-xdg-env
+kdeadmin
+kdeartwork
+#kdegames
+kdegraphics
+kdemultimedia
+kdenetwork
+kdepim
+kdeutils
+polkit-kde
+#pam_kde
+smb4k-kde4
+virtuoso
+"""
+
+# please add below
+# packages that needs aditional settings
+# such as needed kernel modules , rc.conf enable ...
+
+settings = """
+virtuoso
+"""

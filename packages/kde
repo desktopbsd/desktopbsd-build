@@ -1,0 +1,25 @@
+desc = """
+KDE desktop environment.
+"""
+
+deps = """
+xserver
+utils
+utils-x
+print
+internet
+sound-video
+#office
+font
+kde
+qt-common
+"""
+packages = """
+"""
+desktopbsd_deps="""
+ports
+kde
+common
+qt-gcommon
+"""
+

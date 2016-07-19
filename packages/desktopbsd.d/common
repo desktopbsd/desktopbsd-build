@@ -1,0 +1,15 @@
+desc = """
+DesktopBSD common settings
+"""
+
+packages = """
+desktopbsd-grub2-settings
+desktopbsd-installed-settings
+desktopbsd-live-settings
+desktopbsd-wallpapers
+#gbi
+update-station
+"""
+
+settings="""
+"""

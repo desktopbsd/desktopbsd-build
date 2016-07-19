@@ -1,0 +1,16 @@
+desc = """
+DesktopBSD common ports
+"""
+
+packages = """
+ssft
+#desktopbsd-bug-report
+desktopbsd-irc
+inxi
+networkmgr
+fbsdupdatecheck
+fbsdpkgupdate
+"""
+
+settings="""
+"""

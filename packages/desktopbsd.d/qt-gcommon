@@ -1,0 +1,10 @@
+desc = """
+DesktopBSD qt flavours common settings
+"""
+
+packages = """
+desktopbsd-wallpapers
+"""
+
+settings="""
+"""
