@@ -1,6 +1,6 @@
 #!/bin/sh
 #####################################################################
-# Copyright (c) 2015, GhostBSD. All rights reserved.
+# Copyright (c) 2015, DesktopBSD. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -14,7 +14,7 @@
 #    disclaimer in the documentation and/or other materials provided
 #    with the distribution.
 #
-# 3. Neither then name of  GhostBSD nor the names of its
+# 3. Neither then name of  DesktopBSD nor the names of its
 #    contributors maybe used to endorse or promote products derived
 #    from this software without specific prior written permission.
 #

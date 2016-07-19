@@ -7,7 +7,7 @@
 # $FreeBSD$
 # $Id: installworld.sh,v 1.8 2006/06/11 18:29:50 saturnero Exp $
 
-set  -e -u
+set -e -u
 
 if [ -z "${LOGFILE:-}" ]; then
     echo "This script can't run standalone."
@@ -15,6 +15,7 @@ if [ -z "${LOGFILE:-}" ]; then
     exit 1
 fi
 
+#jail_name=${PACK_PROFILE}${ARCH}
 JAILFS=$(echo ${BASEDIR} | cut -d / -f 3,3)
 jail_name=${JAILFS}${PACK_PROFILE}${ARCH}
 
@@ -46,10 +47,10 @@ if [ "${MD_BACKEND}" = "file" ]
     then
         FSSIZE=$(echo "${BACKEND_SIZE}*1024^2" | bc | cut -d . -f1)
         dd if=/dev/zero of=${UFSFILE} bs=1k count=1 seek=$((${FSSIZE} - 1))
-        DEVICE=$(mdconfig -o cluster -o async -S 4096 -a -t vnode -f ${UFSFILE})
+        DEVICE=$(mdconfig -a -t vnode -f ${UFSFILE})
     else
         FSSIZE=$(echo "${USR_SIZE}*1024^2" | bc | cut -d . -f1)
-        DEVICE=$(mdconfig -o cluster -o async -S 4096 -a -t malloc -s ${FSSIZE}k)
+        DEVICE=$(mdconfig -a -t malloc -s ${FSSIZE}k)
         dd if=/dev/zero of=/dev/${DEVICE} bs=1k count=1 seek=$((${FSSIZE} - 1))
 fi
 
@@ -58,7 +59,6 @@ echo ${DEVICE} > ${BASEDIR}/mddevice
 newfs -o space /dev/${DEVICE} 
 mkdir -p ${MOUNTPOINT}
 mount -o noatime /dev/${DEVICE} ${MOUNTPOINT}
-mkdir -p ${BASEDIR}/usr/src/sys
 }
 
 install_built_world()
@@ -121,28 +121,23 @@ if [ ! -f /etc/jail.conf ] ; then
     touch /etc/jail.conf
 fi
 
-set +e
-isalready=$(grep "^${jail_name}" /etc/jail.conf)
-
-if [ -n "$isalready" ] ; then
-    echo "jail already exists and won't be added"
-else
+set +e 
+grep ^"${jail_name}" /etc/jail.conf
+if [ $? -ne  0 ] ; then
     jail_add
+else
+    echo "jail already exists and won't be added"
 fi
 }
 
-
 # makes initial memory device to install over it
-if [ ! -f ${BASEDIR}/mddevice ]; then
-    mkmd_device
-    if [ -n "${FETCH_FREEBSDBASE:-}" ]; then
-        install_fetched_freebsd
-    else
-        install_built_world
-fi
-fi
+mkmd_device
 
-
+if [ -n "${FETCH_FREEBSDBASE:-}" ]; then
+    install_fetched_freebsd
+else
+    install_built_world
+fi
 
 if [ ! -d ${BASEDIR}/usr/local/etc/default ]; then
     mkdir -p ${BASEDIR}/usr/local/etc/default

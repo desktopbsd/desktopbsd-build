@@ -4,27 +4,31 @@ Basic utilities
 deps="""
 """
 packages="""
+# bash is needed for inxi
+bash 
 dpkg
 fish
 freedesktop-sound-theme
 fusefs-ntfs
 fusefs-ext4fuse
+fusefs-simple-mtpfs
 # gawk needed by inxi
 gawk
-# gmake needed by network manager
-gmake 
 git
 grub2-pcbsd
+# this available only on amd64, not on i386 repo
 grub2-efi
 nano
-irssi
+ntfsprogs
+e2fsprogs
 ksh93
 mc
-ntfsprogs
 portupgrade
 py27-gobject
 py27-webkitgtk
 py27-pexpect
+# missing from freebsd repo
+# py27-distutils-extra
 rsync
 sudo
 vim
@@ -33,4 +37,10 @@ zsh
 webcamd
 wmctrl
 xdg-user-dirs
+"""
+
+settings = """
+webcamd
+bash
+fusefs-ntfs
 """

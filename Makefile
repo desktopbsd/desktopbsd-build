@@ -1,16 +1,16 @@
 #
-# Copyright (c) 2009 GhostBSD
+# Copyright (c) 2009 DesktopBSD
 #
 # See COPYING for licence terms.
 #
-# GhostBSD
+# DesktopBSD
 # Makefile, v1.6, Monday, June 30 2014 EricTurgeon
 #
-# GhostBSD makefile. Main targets are:
+# DesktopBSD makefile. Main targets are:
 #
 # iso:		build an iso image
 # img:		build a loopback image 
-# ghostbsd:	same of `iso'
+# desktopbsd:	same of `iso'
 #
 # pkgselect:	choose packages to include in the built system (interactive)
 
@@ -20,9 +20,9 @@ CANONICALOBJDIR:=${MAKEOBJDIRPREFIX}${.CURDIR}
 CANONICALOBJDIR:=/usr/obj${.CURDIR}
 .endif
 
-all: ghostbsd
+all: desktopbsd
 
-ghostbsd: iso
+desktopbsd: iso
 
 pkgselect: obj
 	@sh ${.CURDIR}/scripts/launch.sh ${.CURDIR} pkgselect
@@ -82,7 +82,7 @@ installports: .done_fbsdportsinstall
 	@sh ${.CURDIR}/scripts/launch.sh ${.CURDIR} installports ${CANONICALOBJDIR}/.tmp_fbsdportsinstall
 	@mv ${CANONICALOBJDIR}/.tmp_fbsdportsinstall ${CANONICALOBJDIR}/.done_fbsdportsinstall
 
-gbsdports: .done_portsinstall
+dbsdports: .done_portsinstall
 .done_portsinstall: .done_fbsdportsinstall
 	@-rm -f ${CANONICALOBJDIR}/.tmp_portsinstall
 	@touch ${CANONICALOBJDIR}/.tmp_portsinstall

@@ -1,4 +1,3 @@
-
 desc = """
 Mate desktop environment.
 """
@@ -7,20 +6,20 @@ deps = """
 xserver
 utils
 utils-x
-dm
 print
 internet
 sound-video
 office
 font
-graphic
 gnome
+gtk-common
 """
 packages = """
 """
-ghostbsd_deps="""
+desktopbsd_deps="""
 ports
 gnome
 common
+gtk-gcommon
 """
 

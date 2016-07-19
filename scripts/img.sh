@@ -1,10 +1,10 @@
 #!/bin/sh
 #
-# Copyright (c) 2011 GhostBSD
+# Copyright (c) 2011 DesktopBSD
 #
 # See COPYING for licence terms.
 #
-# $GhostBSD$
+# $DesktopBSD$
 # $Id: img.sh,v 1.6 monday 12/26/11 Eric Exp $
 
 set -e -u
@@ -18,16 +18,16 @@ fi
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export PATH
 
-GHOSTBSD_LABEL=`echo $GHOSTBSD_LABEL | tr '[:lower:]' '[:upper:]'`
+DESKTOPBSD_LABEL=`echo $DESKTOPBSD_LABEL | tr '[:lower:]' '[:upper:]'`
 cd ${BASEDIR} && tar -cpzf ${BASEDIR}/dist/etc.tgz etc
 
 make_bios_img()
 {
 echo "==> making bios img"
-echo "/dev/ufs/${GHOSTBSD_LABEL} / ufs ro,noatime 1 1" > ${BASEDIR}/etc/fstab
+echo "/dev/ufs/${DESKTOPBSD_LABEL} / ufs ro,noatime 1 1" > ${BASEDIR}/etc/fstab
 echo "proc /proc procfs rw 0 0" >> ${BASEDIR}/etc/fstab 
 echo "linproc /compat/linux/proc linprocfs rw 0 0" >> ${BASEDIR}/etc/fstab
-makefs -B little -o label=${GHOSTBSD_LABEL} ${IMGPATH} ${BASEDIR}
+makefs -B little -o label=${DESKTOPBSD_LABEL} ${IMGPATH} ${BASEDIR}
 if [ $? -ne 0 ]; then
   echo "makefs failed"
   exit 1
@@ -49,12 +49,12 @@ echo "bios img done"
 make_uefi_img()
 {
 echo "==> making uefi img"
-echo "/dev/ufs/${GHOSTBSD_LABEL} / ufs ro,noatime 1 1" > ${BASEDIR}/etc/fstab
+echo "/dev/ufs/${DESKTOPBSD_LABEL} / ufs ro,noatime 1 1" > ${BASEDIR}/etc/fstab
 echo "proc /proc procfs rw 0 0" >> ${BASEDIR}/etc/fstab 
 echo "linproc /compat/linux/proc linprocfs rw 0 0" >> ${BASEDIR}/etc/fstab
 
 # Borrowed from freebsd release scripts
-makefs -B little -o label=$GHOSTBSD_LABEL ${UEFI_IMGPATH}.part ${BASEDIR}
+makefs -B little -o label=$DESKTOPBSD_LABEL ${UEFI_IMGPATH}.part ${BASEDIR}
 if [ $? -ne 0 ]; then
 	echo "makefs for uefi failed"
 	exit 1

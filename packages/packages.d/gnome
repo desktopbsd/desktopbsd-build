@@ -45,6 +45,7 @@ packages = """
     gnome-shell
     gnome-shell-extensions
     gnome-system-log
+    gnome-terminal
     gnome-tweak-tool
     gnome-user-share
     gucharmap

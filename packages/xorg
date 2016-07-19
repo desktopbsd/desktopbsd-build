@@ -7,20 +7,14 @@ deps = """
 mini-xserver
 utils
 utils-x
-#dm
 print
-#internet
-#sound-video
-#office
 font
-#graphic
-#xfce
 """
 packages = """
 """
-ghostbsd_deps="""
+desktopbsd_deps="""
 ports
-#xfce
 common
+xorg
 """
 

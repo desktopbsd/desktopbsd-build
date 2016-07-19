@@ -13,7 +13,7 @@ if [ ! -f "/usr/local/bin/git" ]; then
   exit 1
 fi
 
-# Installing pc-sysinstall and ghostbsd installer
+# Installing pc-sysinstall and desktopbsd installer
 if [ ! -d ${BASEDIR}/pc-sysinstall ]; then
   echo "Downloading pc-sysinstall tools from GitHub"
 git clone https://github.com/desktopbsd/pc-sysinstall.git ${BASEDIR}/pc-sysinstall >/dev/null 2>&1
@@ -80,7 +80,7 @@ rm -f ${BASEDIR}/config.sh
 rm -rf ${BASEDIR}/pc-sysinstall
 rm -rf ${BASEDIR}/gbi
 
-# installing GhostBSD wallpapers
+# installing operator
 if [ ! -d ${BASEDIR}/operator ]; then
   echo "# Downloading operator from GitHub #"
   git clone https://github.com/GhostBSD/operator.git ${BASEDIR}/operator >/dev/null 2>&1

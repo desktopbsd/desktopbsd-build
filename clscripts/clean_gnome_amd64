@@ -43,7 +43,6 @@ if [ -n $jailrun ]; then
     service jail onestop $jail_name
 fi
 }
-#stop_dev
 stop_jail
 stop_dev
 cd $curdir && cd .. && make cleandir

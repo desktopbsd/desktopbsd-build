@@ -1,10 +1,10 @@
 #!/bin/sh
 #
-# Copyright (c) 2009 GhostBSD
+# Copyright (c) 2009 DesktopBSD
 #
 # See COPYING for licence terms.
 #
-# $GhostBSD$
+# $DesktopBSD$
 # $Id: buildworld.sh,v 1.8 Wednesday, December 07 2011 21:09 Eric Exp $
 
 set -e -u

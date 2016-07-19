@@ -5,8 +5,8 @@ deps="""
 """
 packages="""
 xorg
-#virtualbox-ose-additions
 cursor-dmz-theme
 setxkbmap
+slim
 xrandr
 """

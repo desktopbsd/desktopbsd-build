@@ -18,8 +18,8 @@ if [ "`id -u`" != "0" ]; then
     exit 1
 fi
 
-# If the GHOSTBSD_DEBUG environment variable is set, be verbose.
-[ ! -z "${GHOSTBSD_DEBUG:-}" ] && set -x
+# If the DESKTOPBSD_DEBUG environment variable is set, be verbose.
+[ ! -z "${DESKTOPBSD_DEBUG:-}" ] && set -x
 
 # Set the absolute path for the toolkit dir
 LOCALDIR=$(cd $(dirname $0)/.. && pwd)
@@ -35,17 +35,17 @@ if [ -n "${1:-}" ]; then
     LOGFILE=$1
     REMOVELOG=0
 else
-    LOGFILE=$(mktemp -q /tmp/ghostbsd.XXXXXX)
+    LOGFILE=$(mktemp -q /tmp/desktopbsd.XXXXXX)
     REMOVELOG=1
 fi
 
 cd $CURDIR
 
-. ./conf/ghostbsd.defaults.conf
+. ./conf/desktopbsd.defaults.conf
 
-GHOSTBSD_CONF=${GHOSTBSD_CONF:-./conf/ghostbsd.conf}
+DESKTOPBSD_CONF=${DESKTOPBSD_CONF:-./conf/desktopbsd.conf}
 
-[ -f ${GHOSTBSD_CONF} ] && . ${GHOSTBSD_CONF}
+[ -f ${DESKTOPBSD_CONF} ] && . ${DESKTOPBSD_CONF}
 
 # XXX set $ARCH and mandatory variables here.
 if [ -z ${ARCH} ] 
@@ -62,10 +62,10 @@ if [ ! -z ${MAKEOBJDIRPREFIX:-} ]; then
 fi
 
 report_error() {
-    if [ ! -z ${GHOSTBSD_ERROR_MAIL:-} ]; then
+    if [ ! -z ${DESKTOPBSD_ERROR_MAIL:-} ]; then
 	cat ${LOGFILE} | \
-	    mail -s "GhostBSD build error in ${TARGET} phase" \
-	    ${GHOSTBSD_ERROR_MAIL}
+	    mail -s "DESKTOPBSD build error in ${TARGET} phase" \
+	    ${DESKTOPBSD_ERROR_MAIL}
     fi
 }
 

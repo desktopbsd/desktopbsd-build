@@ -4,25 +4,29 @@ Basic utilities
 deps="""
 """
 packages="""
+# bash needed for inxi
+bash
 dpkg
 #fish
 freedesktop-sound-theme
 #fusefs-ntfs
 #fusefs-ext4fuse
-# gawk needed by inxi
-gawk
 # gmake needed by network manager
 gmake 
 #git
 grub2-pcbsd
 grub2-efi
 #nano
+#ntfsprogs
 #ksh93
-mc
+#mc
 portupgrade
 py27-gobject
+py27-gobject3
 py27-webkitgtk
 py27-pexpect
+# this is missing from freebsd repo
+# py27-distutils-extra
 rsync
 sudo
 #vim
@@ -30,4 +34,8 @@ sudo
 #zsh
 #webcamd
 wmctrl
+"""
+
+settings = """
+bash
 """

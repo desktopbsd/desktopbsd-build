@@ -13,7 +13,7 @@ if [ -z "${LOGFILE:-}" ]; then
     exit 1
 fi
 
-GHOSTBSD_LABEL=${GHOSTBSD_LABEL:-"GhostBSD"}
+DESKTOPBSD_LABEL=${DESKTOPBSD_LABEL:-"GhostBSD"}
 
 echo "#### Building bootable ISO image for ${ARCH} ####"
 
@@ -39,14 +39,14 @@ mtree -Pcp ${BASEDIR} | bzip2 -9 > root.dist.bz2
 mkdir -p ${BASEDIR}/dist
 mv root.dist.bz2 ${BASEDIR}/dist/
 
-echo "/dev/iso9660/${GHOSTBSD_LABEL} / cd9660 rw 0 0" > ${BASEDIR}/etc/fstab
+echo "/dev/iso9660/${DESKTOPBSD_LABEL} / cd9660 rw 0 0" > ${BASEDIR}/etc/fstab
 
 cd ${BASEDIR}
 cp ${SRCDIR}/release/powerpc/boot.tbxi boot
 
 echo "Running mkisofs..."
 
-mkisofs -hfs-bless boot -map ${SRCDIR}/release/powerpc/hfs.map -r -hfs -part -no-desktop -hfs-volid ${GHOSTBSD_LABEL} -V ${GHOSTBSD_LABEL} -l -J -L -o $ISOPATH . >> ${LOGFILE} 2>&1
+mkisofs -hfs-bless boot -map ${SRCDIR}/release/powerpc/hfs.map -r -hfs -part -no-desktop -hfs-volid ${DESKTOPBSD_LABEL} -V ${DESKTOPBSD_LABEL} -l -J -L -o $ISOPATH . >> ${LOGFILE} 2>&1
 
 echo "ISO created:"
 

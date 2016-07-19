@@ -29,25 +29,21 @@ cd ${BASEDIR}
 ln -sf /usr/home /home
 cd -
 
-#if [ ! -d ${BASEDIR}/home/${GHOSTBSD_USER} ]; then
-#    mkdir -p ${BASEDIR}/home/${GHOSTBSD_USER}
-#fi
-
 set +e
-grep -q ^${GHOSTBSD_USER}: ${BASEDIR}/etc/master.passwd
+grep -q ^${DESKTOPBSD_USER}: ${BASEDIR}/etc/master.passwd
 
 if [ $? -ne 0 ]; then
-    chroot ${BASEDIR} pw useradd ${GHOSTBSD_USER} \
-         -c "Live User" -d "/home/${GHOSTBSD_USER}" \
+    chroot ${BASEDIR} pw useradd ${DESKTOPBSD_USER} \
+         -c "Live User" -d "/home/${DESKTOPBSD_USER}" \
         -g wheel -G operator -m -s /bin/csh -k /usr/share/skel -w none
 else
-    chroot ${BASEDIR} pw usermod ${GHOSTBSD_USER} \
-        -c "Live User" -d "/home/${GHOSTBSD_USER}" \
+    chroot ${BASEDIR} pw usermod ${DESKTOPBSD_USER} \
+        -c "Live User" -d "/home/${DESKTOPBSD_USER}" \
         -g wheel -G operator -m -s /bin/csh -k /usr/share/skel -w none
 fi
 
 
-chroot ${BASEDIR} pw mod user ${GHOSTBSD_USER} -w none
+chroot ${BASEDIR} pw mod user ${DESKTOPBSD_USER} -w none
 
-chroot ${BASEDIR} su ${GHOSTBSD_USER} -c /usr/local/bin/xdg-user-dirs-update
-chroot ${BASEDIR} su ${GHOSTBSD_USER} -c /usr/local/share/${GHOSTBSD_USER}/common-live-settings/config-live-settings
+chroot ${BASEDIR} su ${DESKTOPBSD_USER} -c /usr/local/bin/xdg-user-dirs-update
+chroot ${BASEDIR} su ${DESKTOPBSD_USER} -c /usr/local/share/${DESKTOPBSD_USER}/common-live-settings/config-live-settings

@@ -19,7 +19,7 @@ if [ ! -f "/usr/local/bin/git" ]; then
   exit 1
 fi
 
-PKGFILE=${PKGFILE:-${LOCALDIR}/conf/${PACK_PROFILE}-ghostbsd};
+PKGFILE=${PKGFILE:-${LOCALDIR}/conf/${PACK_PROFILE}-desktopbsd};
 
 #if [ ! -f ${PKGFILE} ]; then
  # return
@@ -28,21 +28,21 @@ touch ${PKGFILE}
 
 # Search main file package for include dependecies
 # and build an depends file ( depends )
-awk '/^ghostbsd_deps/,/^"""/' ${LOCALDIR}/packages/${PACK_PROFILE} | grep -v '"""' | grep -v '#' > ${LOCALDIR}/packages/${PACK_PROFILE}-gdepends
+awk '/^desktopbsd_deps/,/^"""/' ${LOCALDIR}/packages/${PACK_PROFILE} | grep -v '"""' | grep -v '#' > ${LOCALDIR}/packages/${PACK_PROFILE}-gdepends
 
 # If exist an old .packages file removes it
-if [ -f ${LOCALDIR}/conf/${PACK_PROFILE}-ghostbsd ] ; then
-  rm -f ${LOCALDIR}/conf/${PACK_PROFILE}-ghostbsd
+if [ -f ${LOCALDIR}/conf/${PACK_PROFILE}-desktopbsd ] ; then
+  rm -f ${LOCALDIR}/conf/${PACK_PROFILE}-desktopbsd
 fi
 
 # Reads depends file and search for packages entries in each file from depends
-# list, then append all packages found in ghostbsd file
+# list, then append all packages found in desktopbsd file
 while read pkgs ; do
-awk '/^packages/,/^"""/' ${LOCALDIR}/packages/ghostbsd.d/$pkgs  >> ${LOCALDIR}/conf/${PACK_PROFILE}-gpackage
+awk '/^packages/,/^"""/' ${LOCALDIR}/packages/desktopbsd.d/$pkgs  >> ${LOCALDIR}/conf/${PACK_PROFILE}-gpackage
 done < ${LOCALDIR}/packages/${PACK_PROFILE}-gdepends
 
 # Removes """ and # from temporary package file
-cat ${LOCALDIR}/conf/${PACK_PROFILE}-gpackage | grep -v '"""' | grep -v '#' > ${LOCALDIR}/conf/${PACK_PROFILE}-ghostbsd
+cat ${LOCALDIR}/conf/${PACK_PROFILE}-gpackage | grep -v '"""' | grep -v '#' > ${LOCALDIR}/conf/${PACK_PROFILE}-desktopbsd
 
 # Removes temporary files
 if [ -f ${LOCALDIR}/conf/${PACK_PROFILE}-gpackage ] ; then
@@ -61,24 +61,24 @@ cp -af /etc/resolv.conf ${BASEDIR}/etc
 
 install_and_build_dports()
 {
-# Compiling ghostbsd ports
+# Compiling desktopbsd ports
 if [ -d ${BASEDIR}/ports ]; then
   rm -Rf ${BASEDIR}/ports
 fi
 #mkdir -p ${BASEDIR}/usr/ports
 
-echo "# Downloading ghostbsd ports from GitHub #"
+echo "# Downloading desktopbsd ports from GitHub #"
 git clone https://github.com/desktopbsd/desktopbsd-ports.git ${BASEDIR}/ports >/dev/null 2>&1
 cp -Rf $BASEDIR/ports/ $BASEDIR/dist/ports
 
-# build ghostbsd ports 
+# build desktopbsd ports 
 cp -af ${PKGFILE} ${BASEDIR}/mnt
 PLOGFILE=".log_portsinstall"
 
 cat > ${BASEDIR}/mnt/portsbuild.sh << "EOF"
 #!/bin/sh 
 
-pkgfile="${PACK_PROFILE}-ghostbsd"
+pkgfile="${PACK_PROFILE}-desktopbsd"
 FORCE_PKG_REGISTER=true
 export FORCE_PKG_REGISTER
 PLOGFILE=".log_portsinstall"
@@ -89,7 +89,7 @@ cd /mnt
 while read pkgc; do
     if [ -n "${pkgc}" ] ; then
         echo "Building and installing port $pkgc"
-        # builds ghostbsd ports in chroot
+        # builds desktopbsd ports in chroot
         for port in $(find /ports/ -type d -depth 2 -name ${pkgc})  ; do
         cd $port
         make >> /mnt/${PLOGFILE} 2>&1 
@@ -104,7 +104,7 @@ rm -f /mnt/$pkgfile
 EOF
 
 
-# Build and install ghostbsd ports in chroot 
+# Build and install desktopbsd ports in chroot 
 chrootcmd="chroot ${BASEDIR} sh /mnt/portsbuild.sh"
 $chrootcmd
 
@@ -152,7 +152,7 @@ EOF
 cat > ${BASEDIR}/mnt/addpkg.sh << "EOF"
 #!/bin/sh 
 
-pkgfile="${PACK_PROFILE}-ghostbsd"
+pkgfile="${PACK_PROFILE}-desktopbsd"
 FORCE_PKG_REGISTER=true
 export FORCE_PKG_REGISTER
 PLOGFILE=".log_portsinstall"
@@ -175,7 +175,7 @@ rm addpkg.sh
 rm $pkgfile
 EOF
 
-# Install ghostbsd ports from repo in chroot 
+# Install desktopbsd ports from repo in chroot 
 chrootcmd="chroot ${BASEDIR} sh /mnt/addpkg.sh"
 $chrootcmd
 
