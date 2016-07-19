@@ -3,6 +3,7 @@ DesktopBSD gnome settings
 """
 
 packages = """
+desktopbsd-gdm-theme
 gnome-installed-settings
 gnome-live-settings
 """
