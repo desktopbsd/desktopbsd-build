@@ -13,10 +13,10 @@ fi
 
 curdir=`pwd`
 
-PACK_PROFILE=kde
+PACK_PROFILE=xorg
 export PACK_PROFILE
 
-ARCH=i386
+ARCH=amd64
 export ARCH
 
 . ./../conf/desktopbsd.defaults.conf

@@ -20,7 +20,8 @@ if [ -z "${EXTRA:-}" ]; then
     return
 fi
 
-jail_name=${PACK_PROFILE}${ARCH}
+JAILFS=$(echo ${BASEDIR} | cut -d / -f 3,3)
+jail_name=${JAILFS}${PACK_PROFILE}${ARCH}
 
 echo "#### Running plugins ####"
 
@@ -47,9 +48,7 @@ for plugin in ${EXTRA}; do
     fi
 done
 
-if [ -d ${BASEDIR}/dist/ports/Mk ] ; then
-    rm -f ${BASEDIR}/usr/ports
-    mkdir -p ${BASEDIR}/usr/ports
+if [ -d ${BASEDIR}/usr/ports/Mk ] ; then
     if [ -f "${BASEDIR}/pdevice" ]; then
         PDEVICE=$(cat ${BASEDIR}/pdevice)
         if [ -c "/dev/${PDEVICE}" ]; then
@@ -59,6 +58,8 @@ if [ -d ${BASEDIR}/dist/ports/Mk ] ; then
     fi
     rm -f ${BASEDIR}/ports.ufs
     rm -f ${BASEDIR}/pdevice
+#    rm -f ${BASEDIR}/usr/ports
+#    mkdir -p ${BASEDIR}/usr/ports
 fi
 
 if ! ${USE_JAILS}; then

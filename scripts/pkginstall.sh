@@ -93,18 +93,18 @@ cp $PKGFILE ${BASEDIR}/mnt
 
 sed -i '' 's@signature_type: "fingerprints"@#signature_type: "fingerprints"@g' ${BASEDIR}/etc/pkg/FreeBSD.conf
 
-if [ ! -d ${BASEDIR}/dist/ports ]; then
+if [ ! -d ${BASEDIR}/usr/ports ]; then
     # prepares ports file backend an mounts it over /dist/ports
     PSIZE=$(echo "${PORTS_SIZE}*1024^2" | bc | cut -d . -f1)
     dd if=/dev/zero of=${BASEDIR}/ports.ufs bs=1k count=1 seek=$((${PSIZE} - 1))
     PDEVICE=$(mdconfig -o async -o cluster -S 4096 -a -t vnode -f ${BASEDIR}/ports.ufs)
     echo $PDEVICE >${BASEDIR}/pdevice
     newfs -o space /dev/$PDEVICE
-    mkdir -p ${BASEDIR}/dist/ports
-    mount -o noatime /dev/$PDEVICE  ${BASEDIR}/dist/ports
+    mkdir -p ${BASEDIR}/usr/ports
+    mount -o noatime /dev/$PDEVICE  ${BASEDIR}/usr/ports
     # prepares ports tree
     portsnap fetch
-    portsnap extract -p ${BASEDIR}/dist/ports
+    portsnap extract -p ${BASEDIR}/usr/ports
 fi
 
 # prepares addpkg.sh script to add packages under chroot
@@ -114,13 +114,7 @@ cat > ${BASEDIR}/mnt/addpkg.sh << "EOF"
 FORCE_PKG_REGISTER=true
 export FORCE_PKG_REGISTER
 
-ln -sf /dist/ports /usr/ports
-
-# builds pkg from ports to avoid Y/N question
-ln -sf /dist/ports /usr/ports
-#cd /usr/ports/ports-mgmt/pkg
-#make
-#make install
+#ln -sf /dist/ports /usr/ports
 
 # pkg bootstrap with env 
 env ASSUME_ALWAYS_YES=YES pkg bootstrap 

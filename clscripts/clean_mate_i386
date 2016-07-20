@@ -23,7 +23,7 @@ export ARCH
 
 stop_dev()
 {
-for i in mddevice pdevice ; do
+for i in pdevice mddevice ; do
     if [ -f "${BASEDIR}/$i" ]; then
         DEVICE=$(cat ${BASEDIR}/$i)
         if [ -c "/dev/${DEVICE}" ]; then

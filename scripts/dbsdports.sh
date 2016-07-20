@@ -74,16 +74,18 @@ if [ ! -f "/usr/local/bin/git" ]; then
   exit 1
 fi
 echo "# Downloading desktopbsd ports from GitHub #"
-git clone https://github.com/desktopbsd/ports.git ${BASEDIR}/ports   >/dev/null 2>&1
-cp -Rf $BASEDIR/ports/ $BASEDIR/dist/ports
+git clone https://github.com/desktopbsd/desktopbsd-ports.git ${BASEDIR}/ports   >/dev/null 2>&1
+cp -Rf $BASEDIR/ports/ $BASEDIR/usr/ports
 
 echo "Building ports depends."
-rm -Rf  ${BASEDIR}/dist/ports/.git
+rm -Rf  ${BASEDIR}/ports/.git
 
 while read gport ; do
     for port in $(find ${BASEDIR}/ports/ -type d -depth 2 -name $gport )  ; do
         cd $port
-        cat Makefile| grep DEPENDS |sed -e 's/kde4/kde/g'| tr '\' ' '| grep PORTSDIR |cut -d : -f 2| cut -d / -f 3 >> ${PKGFILED}
+        cat Makefile| grep DEPENDS |sed -e 's/kde4/kde/g' | \
+        sed -e 's/glib2.0/libglib2.0/g'| tr '\' ' '| grep PORTSDIR | \
+        cut -d : -f 2| cut -d / -f 3 >> ${PKGFILED}
     done
 done < $PKGFILE
 }
@@ -150,7 +152,7 @@ while read pkgc; do
         echo "Building and installing port $pkgc"
         # builds desktopbsd ports in chroot
         for port in $(find /ports/ -type d -depth 2 -name ${pkgc})  ; do
-        cd /usr/ports/$port
+        cd /usr$port
         make >> /mnt/${PLOGFILE} 2>&1 
         make install >> /mnt/${PLOGFILE} 2>&1 
         done
@@ -161,7 +163,6 @@ rm -f /mnt/portsbuild.sh
 rm -f /mnt/$pkgfile
 
 EOF
-
 
 # Build and install desktopbsd ports in chroot 
 chrootcmd="chroot ${BASEDIR} sh /mnt/portsbuild.sh"
