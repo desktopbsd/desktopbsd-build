@@ -21,6 +21,7 @@ fi
 
 
 PKGFILE=${PKGFILE:-/tmp/${PACK_PROFILE}-desktopbsd};
+PKGFILED=/tmp/${PACK_PROFILE}-desktopbsd-deps
 
 #if [ ! -f ${PKGFILE} ]; then
  # return
@@ -183,7 +184,9 @@ cp -af /etc/resolv.conf ${BASEDIR}/etc
 
 build_ports_list
 build_ports_depends
-install_ports_depends
+if [ -s ${PKGFILED} ]; then
+    install_ports_depends
+fi
 build_ports
 
 # umount /var/run if not using jails
