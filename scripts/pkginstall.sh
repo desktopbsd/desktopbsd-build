@@ -41,6 +41,12 @@ while read pkgs ; do
 awk '/^packages/,/^"""/' ${LOCALDIR}/packages/packages.d/$pkgs  >> /tmp/${PACK_PROFILE}-package
 done < /tmp/${PACK_PROFILE}-depends 
 
+# search for $ARCH specific packages if an $ARCH section is found in each file from depends
+# lost, then append all packages found in packages file
+while read pkgs ; do
+awk '/^'${ARCH}'/,/^"""/' ${LOCALDIR}/packages/packages.d/$pkgs  >> /tmp/${PACK_PROFILE}-package
+done < /tmp/${PACK_PROFILE}-depends 
+
 # Removes """ and # from temporary package file
 cat /tmp/${PACK_PROFILE}-package | grep -v '"""' | grep -v '#' > /tmp/${PACK_PROFILE}-packages
 
