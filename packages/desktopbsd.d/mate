@@ -4,10 +4,10 @@ DesktopBSD mate settings
 
 packages = """
 desktopbsd-slim-theme
-mate-installed-settings
-mate-live-settings
-desktopbsd-mate-themes
-station-tweak
+#mate-installed-settings
+#mate-live-settings
+#desktopbsd-mate-themes
+#station-tweak
 """
 
 settings="""
