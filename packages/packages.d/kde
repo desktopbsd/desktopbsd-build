@@ -20,6 +20,8 @@ kdemultimedia
 kdenetwork
 kdepim
 kdeutils
+pcbsd-utils
+pcbsd-utils-qt5
 polkit-kde
 #pam_kde
 smb4k-kde4

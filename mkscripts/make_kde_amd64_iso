@@ -22,7 +22,7 @@ export ARCH
 USR_SIZE=6.0
 export USR_SIZE
 
-INSTALL_PORTS=${INSTALL_PORTS:-"audio/lame sysutils/pcbsd-utils-qt5"}
+INSTALL_PORTS=${INSTALL_PORTS:-"audio/lame"}
 export INSTALL_PORTS
 
 EXTRA="gitpkg adduser  finalize"
