@@ -1,0 +1,21 @@
+
+desc = """
+lumina desktop environment.
+"""
+
+deps = """
+lumina
+xserver
+utils
+utils-x
+print
+font
+"""
+packages = """
+"""
+desktopbsd_deps="""
+ports
+common
+lumina
+"""
+

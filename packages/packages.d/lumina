@@ -1,0 +1,14 @@
+description="""
+	Lumina desktop
+"""
+deps="""
+"""
+packages="""
+lumina
+lumina-i18n
+slim
+pcbsd-utils-qt5
+"""
+
+settings = """
+"""

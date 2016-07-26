@@ -1,0 +1,10 @@
+desc = """
+DesktopBSD lumina settings
+"""
+
+packages = """
+desktopbsd-slim-theme
+"""
+
+settings="""
+"""
