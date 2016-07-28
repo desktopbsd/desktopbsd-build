@@ -7,6 +7,7 @@ desktopbsd-grub2-settings
 desktopbsd-installed-settings
 desktopbsd-live-settings
 desktopbsd-wallpapers
+desktopbsd-icons
 #gbi
 update-station
 """
