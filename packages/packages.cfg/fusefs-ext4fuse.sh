@@ -4,8 +4,8 @@
 grep -q "fuse_load" /boot/loader.conf
 if [ $? -ne 0 ]; then
     echo 'fuse_load="YES"' >> /boot/loader.conf
-fi 
+fi
 
-if [ -e /usr/local/bin/ntfs-3g ]; then
-    ln -s /usr/local/bin/ntfs-3g /sbin/mount_ntfs
+if [ -e /usr/local/bin/ext4fuse ]; then
+    ln -s /usr/local/bin/ext4fuse /sbin/mount_ext4fs
 fi
