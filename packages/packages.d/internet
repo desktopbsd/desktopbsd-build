@@ -10,8 +10,4 @@ chromium
 
 settings = """
 chromium
-<<<<<<< HEAD
 """
-=======
-"""
->>>>>>> e024c1499f7f684885f4ff4ce0337f366c1cd384
