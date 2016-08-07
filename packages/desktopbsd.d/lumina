@@ -4,6 +4,7 @@ DesktopBSD lumina settings
 
 packages = """
 desktopbsd-slim-theme
+lumina-installed-settings
 """
 
 settings="""

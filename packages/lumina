@@ -4,13 +4,17 @@ lumina desktop environment.
 """
 
 deps = """
+font
+internet
 lumina
-xserver
+office
+print
+qt-common
 utils
 utils-x
-print
-font
+xserver
 """
+
 packages = """
 """
 desktopbsd_deps="""

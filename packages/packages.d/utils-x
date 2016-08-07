@@ -6,7 +6,7 @@ deps="""
 packages="""
 # mesa-demos for inxi 
 mesa-demos
-# zenity for ghostbsd-irc
+# zenity for desktopbsd-irc
 zenity
 octopkg
 """

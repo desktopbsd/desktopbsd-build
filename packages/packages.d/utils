@@ -18,6 +18,10 @@ git
 grub2-pcbsd
 # this available only on amd64, not on i386 repo
 nano
+<<<<<<< HEAD
+#ntfsprogs
+=======
+>>>>>>> e024c1499f7f684885f4ff4ce0337f366c1cd384
 e2fsprogs
 ksh93
 mc
