@@ -22,7 +22,7 @@ export ARCH
 USR_SIZE=6.0
 export USR_SIZE
 
-INSTALL_PORTS=${INSTALL_PORTS:-"audio/lame"}
+INSTALL_PORTS=${INSTALL_PORTS:-"audio/lame x11/lumina x11/lumina-i18n"}
 export INSTALL_PORTS
 
 EXTRA="gitpkg adduser finalize"

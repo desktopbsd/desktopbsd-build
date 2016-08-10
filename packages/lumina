@@ -7,9 +7,9 @@ deps = """
 font
 internet
 lumina
-office
+#office
 print
-qt-common
+#qt-common
 utils
 utils-x
 xserver

@@ -4,8 +4,8 @@ description="""
 deps="""
 """
 packages="""
-lumina
-lumina-i18n
+#lumina
+#lumina-i18n
 slim
 """
 
